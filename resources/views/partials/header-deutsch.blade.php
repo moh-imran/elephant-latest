@@ -32,7 +32,7 @@
                     </div>
                     <div class="col-lg-5 text-right text-left-xs text-left-sm order-lg-3">
                         <div class="bar__module">
-                            <a class="btn btn--primary type--uppercase" href="{{'job-builder/de'}}"> <span class="btn__text">
+                            <a class="btn btn--primary type--uppercase" href="{{'de/job-builder'}}"> <span class="btn__text">
                                             Build your dream job
                                         </span> </a>
 

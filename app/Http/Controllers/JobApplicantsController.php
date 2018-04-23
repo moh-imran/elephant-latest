@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Response;
 use directus;
-
+//use Directus\Filesystem\Files;
 class JobApplicantsController extends Controller
 {
 
@@ -18,10 +18,20 @@ class JobApplicantsController extends Controller
 
 
          $data = $request->all();
+         $file = $data['resume'];
 
-         $data['industry'] = implode(",", $data['industry']);
-         $data['key_skills'] = implode(",", $data['key_skills']);
-         $data['position'] = implode(",", $data['position']);
+         $filobj = new \Directus\SDK\File($file->getpathName(), []);
+         $fileUploaded = $this->client->createFile($filobj);
+
+         $data['resume'] = $fileUploaded['id'];
+//         $data['industry'] = implode(",", $data['industry']);
+         $data['industry'] = str_replace(",", " ", $data['industry']);
+//         $data['key_skills'] = implode(",", $data['key_skills']);
+         $data['key_skills'] = str_replace(",", " ", $data['key_skills']);
+//         $data['position'] = implode(",", $data['position']);
+         $data['position'] = str_replace(",", " ", $data['position']);
+
+
 
 
          try {

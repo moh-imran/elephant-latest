@@ -26,7 +26,7 @@
                         <li class="dropdown dropdown--absolute">
                                     <span class="dropdown__trigger">
                                         @if(Request::segment(2) == 'de')
-                                            <a href="{{ url('/job-builder/de') }}">Deutsch</a>
+                                            <a href="{{ url('/de/job-builder') }}">Deutsch</a>
                                         @else
                                             <a href="{{ url('/job-builder') }}">English</a>
                                         @endif
@@ -40,7 +40,7 @@
                                                     <a href="{{ url('/job-builder') }}">English</a>
                                                 </li>
                                                 <li>
-                                                    <a href="{{ url('/job-builder/de') }}">Deutsch</a>
+                                                    <a href="{{ url('/de/job-builder') }}">Deutsch</a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -178,6 +178,10 @@
                             >
                             </multiselect>
                         </div>
+                        <div class="form-group input-icon">
+                            <i class="material-icons">Resume</i>
+                            <input id="location" name="resume" type="file" @change="onFileChange" placeholder="File">
+                        </div>
                         <div class="form-group text-center">
                             <button @click.prevent="prev()" class="previous-btn" style="cursor: pointer;"><i class="material-icons">keyboard_arrow_left</i> Previous</button>
                             <button @click.prevent="next()" style="cursor: pointer;">Next <i class="material-icons">keyboard_arrow_right</i></button>
@@ -197,17 +201,17 @@
                         </div>
                         <ul style="padding-left: 239px;">
                             <li v-for="(item, index) in registration">
-                                <strong v-if="index == 'name'">Name :</strong>
-                                <strong v-if="index == 'email'">Email :</strong>
-                                <strong v-if="index == 'location'">Location :</strong>
-                                <strong v-if="index == 'industry'">Industries :</strong>
-                                <strong v-if="index == 'position'">Positions :</strong>
-                                <strong v-if="index == 'key_skills'">Key Skills :</strong>
-                                <strong v-if="index == 'environment'">Environment :</strong>
-                                <strong v-if="index == 'salary_expectation'">Salary Expectation :</strong>
+                                <strong v-if="index == 'name'">Name :</strong><span v-if="index == 'name'">@{{ item.toString() }}</span>
+                                <strong v-if="index == 'email'">Email :</strong><span v-if="index == 'email'">@{{ item.toString() }}</span>
+                                <strong v-if="index == 'location'">Location :</strong><span v-if="index == 'location'">@{{ item.toString() }}</span>
+                                <strong v-if="index == 'industry'">Industries :</strong><span v-if="index == 'industry'">@{{ item.toString() }}</span>
+                                <strong v-if="index == 'position'">Positions :</strong><span v-if="index == 'position'">@{{ item.toString() }}</span>
+                                <strong v-if="index == 'key_skills'">Key Skills :</strong><span v-if="index == 'key_skills'">@{{ item.toString() }}</span>
+                                <strong v-if="index == 'environment'">Environment :</strong><span v-if="index == 'environment'">@{{ item.toString() }}</span>
+                                <strong v-if="index == 'salary_expectation'">Salary Expectation :</strong><span v-if="index == 'salary_expectation'">@{{ item.toString() }}</span>
 
-                                <span>@{{ item.toString() }}</span>
                             </li>
+                            <li v-if="file != 0"><strong>Resume :</strong><span> @{{  registration.fileName.name}} </span></li>
                         </ul>
 
 

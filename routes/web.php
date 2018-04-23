@@ -11,15 +11,15 @@
 |
 */
 
+//Route::get('/', function () {
+//    echo phpinfo();
+//});
 
 Route::get('/', 'CommonController@index');
 Route::get('/de', 'CommonController@indexDeutsch');
 Route::get('job-builder', 'JobApplicantsController@index');
-Route::get('job-builder/de', 'JobApplicantsController@indexDeutsch');
+Route::get('de/job-builder', 'JobApplicantsController@indexDeutsch');
 
-//Route::get('job-builder', function () {
-//    return view('job-builder');
-//});
 
 Route::post('build-job', 'JobApplicantsController@postJob');
 Route::post('mail', 'CommonController@sendEmail');

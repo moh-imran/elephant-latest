@@ -10,6 +10,7 @@ new Vue({
             selected:null,
             categories:[],
             step: 1,
+            file :'',
             registration : {
                 name:null,
                 email:null,
@@ -19,6 +20,7 @@ new Vue({
                 position:null,
                 key_skills:null,
                 environment:null,
+                fileName :'',
                 salary_expectation:null
             },
         industryOptions: [
@@ -45,6 +47,21 @@ new Vue({
         //     return `${option.library} - ${option.language}`
         // },
 
+        onFileChange : function(e){
+
+            var files = e.target.files || e.dataTransfer.files;
+            console.log(files[0].name.split('.')[1]);
+            // console.log(files);
+            if (!files.length)
+            {
+                this.file = 0;
+                return;
+            }
+
+            this.file = (files[0].name.split('.')[1]).trim();
+            this.registration.fileName = files[0];
+            console.log('files', this.registration.fileName);
+        },
         prev : function() {
             this.step--;
         },
@@ -70,10 +87,13 @@ new Vue({
                     this.errors.push("Location required.");
                 }
 
+
                 if (!this.errors.length){
                     this.step++;
                     console.log('step number', this.step);
                 }
+
+
             }
             else if(this.step == 2){
 
@@ -95,6 +115,14 @@ new Vue({
 
                 if(!this.registration.salary_expectation){
                     this.errors.push("Salary required.");
+                }
+
+                if(this.file == 0){
+                    this.errors.push("Resume required.");
+                }
+
+                if(this.file != 'pdf' && this.file != 'docx' && this.file != 'docs' && this.file != 'doc'){
+                    this.errors.push("Valid format of resume required.");
                 }
 
                 if (!this.errors.length){
@@ -119,11 +147,25 @@ new Vue({
         },
         submit : function() {
 
+            var formData = new FormData();
+            // append string
+            formData.append('name', this.registration.name);
+            formData.append('email', this.registration.email);
+            formData.append('location', this.registration.location);
+            formData.append('industry', this.registration.industry);
+            formData.append('position', this.registration.position);
+            formData.append('key_skills', this.registration.key_skills);
+            formData.append('environment', this.registration.environment);
+            formData.append('salary_expectation', this.registration.salary_expectation);
+
+            // append Blob/File object
+            formData.append('resume', this.registration.fileName, this.registration.fileName.name);
+
             // GET /someUrl
-            this.$http.post('/dev/build-job', this.registration).then(response => {
+            this.$http.post('/dev/build-job', formData).then(response => {
 
                 this.success.push('Application sent successfully.');
-                console.log("response", response);
+                // console.log("response", response);
                 setTimeout(
                     window.location.href = '/dev'
                     , 10000);
