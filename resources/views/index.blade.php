@@ -37,49 +37,49 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-10 col-lg-8">
-                    <h1>Wir beraten und verbinden ExpertInnen</h1>
-                    <p class="lead">Wir freuen uns auf Sie und darauf, die für Sie besten neuen Mitarbeiterinnen und Mitarbeiter zu finden! </p>
+                    <h1>{{ $homeContent->intro_heading }}</h1>
+                    <p class="lead"> {{ $homeContent->intro_subheading }} </p>
                 </div>
             </div>
         </div>
     </section>
     <section class="imageblock switchable feature-large bg--primary">
         <div class="imageblock__content col-lg-6 col-md-4 pos-right">
-            <div class="background-image-holder"> <img alt="image" src="{{ asset('public/img/compnay-team.jpg') }}"> </div>
+            <div class="background-image-holder"> <img alt="image" src={{ $homeImages['block_1_image'] }}> </div>
         </div>
         <div class="container">
             <div class="row">
                 <div class="col-lg-5 col-md-7">
-                    <h2>So wie wir Menschen sind auch Unternehmen mitsamt ihren Strukturen</h2>
-                    <p class="lead">Arbeitsweisen und Anforderungen verschieden. Wir kennen diese Unterschiede, hören aktiv zu und gestalten den Prozess gemeinsam und in Absprache mit Ihnen, um bestmögliche Ergebnisse zu gewährleisten.</p>
-                    <p class="lead">Wir nehmen unsere Gegenüber ernst, stehen Ihnen beratend zur Seite und ermitteln Ihren individuellen Bedarf und die dafür zielführendste Strategie. </p>
+                    <h2>{{ $homeContent->block_1_heading }}</h2>
+                    <p class="lead">{{ $homeContent->block_1_text }}</p>
+                    
                 </div>
             </div>
         </div>
     </section>
     <section class="imageblock switchable feature-large switchable--switch bg--secondary">
         <div class="imageblock__content col-lg-6 col-md-4 pos-right">
-            <div class="background-image-holder"> <img alt="image" src="{{ asset('public/img/ingenieursbranche.jpg') }}"> </div>
+            <div class="background-image-holder"> <img alt="image" src={{ $homeImages['block_2_image'] }}> </div>
         </div>
         <div class="container">
             <div class="row">
                 <div class="col-lg-5 col-md-7">
-                    <h2>Mit uns als Partner wählen Sie eine Zusammenarbeit</h2>
-                    <p class="lead">Die von einem vertrauensvollen und zuverlässigen Miteinander geprägt ist. Diesen Ansatz ergänzen wir mit fachlicher Kompetenz und den Anspruch effektiver Arbeit und persönlichen Ehrgeiz.<br><br>Der Erfolg bestätigt unsere Annahme, dass auch Unternehmen eine andere Art von Kultur bei ihren externen Partnerschaften <br>wünschen: bereits kurz nach unserer Gründung haben wir bereits diverse Unternehmen der IT- und Ingenieursbranche erfolgreich beraten und bei der Besetzung offener Stellen unterstützt.&nbsp;<br></p>
+                    <h2>{{ $homeContent->block_2_heading }}</h2>
+                    <p class="lead">{{ $homeContent->block_2_text }}</p>
                 </div>
             </div>
         </div>
     </section>
     <section class="imageblock switchable feature-large bg--primary">
         <div class="imageblock__content col-lg-6 col-md-4 pos-right">
-            <div class="background-image-holder"> <img alt="image" src="{{ asset('public/img/extra-mile.jpg') }}"> </div>
+            <div class="background-image-holder"> <img alt="image" src={{ $homeImages['block_3_image'] }}> </div>
         </div>
         <div class="container">
             <div class="row">
                 <div class="col-lg-5 col-md-7">
-                    <h2>Unser Selbstanspruch geht noch weiter</h2>
-                    <p class="lead">Auch nach einer erfolgreichen Vermittlung lassen wir weder das Unternehmen noch die vermittelten Kandidaten allein. Wir stehen weiterhin unterstützend an Ihrer Seite (ob Wohnungssuche oder Visabeschaffung, unsere weitreichende Erfahrung steht Ihnen auch hierbei zur Verfügung).&nbsp;</p>
-                    <p class="lead">Für uns ist die Erfolgsgeschichte erst dann geschrieben, wenn gewährleistet ist, dass alle Beteiligten auch noch Jahre nach dem Erstkontakt gern an uns zurückdenken mit dem Gefühl, gut beraten und konstruktiv unterstützt worden zu sein. Wie auch immer der Prozess gestaltet werden soll, wir nehmen uns gern die Zeit, um auf individuelle Vorstellungen einzugehen, und wir sind flexibel und erfahren genug, diese adäquat umzusetzen.</p>
+                    <h2>{{ $homeContent->block_3_heading }}</h2>
+                    <p class="lead">{{ $homeContent->block_3_text }}</p>
+                    
                 </div>
             </div>
         </div>

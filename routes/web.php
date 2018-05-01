@@ -23,3 +23,7 @@ Route::get('de/job-builder', 'JobApplicantsController@indexDeutsch');
 
 Route::post('build-job', 'JobApplicantsController@postJob');
 Route::post('mail', 'CommonController@sendEmail');
+Route::get('get-tweets', 'CommonController@getTweets');
+Route::get('get-linkedin-feeds', 'CommonController@getLinkedInFeeds');
+Route::get('get-home-content', 'CommonController@getHomeContent');
+

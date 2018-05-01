@@ -6,10 +6,12 @@
     "type": "project",
     "require": {
         "php": ">=7.0.0",
+        "directus/sdk": "1.0.0",
         "fideloper/proxy": "~3.3",
+        "j7mbo/twitter-api-php": "^1.0",
         "laravel/framework": "5.5.*",
         "laravel/tinker": "~1.0",
-        "directus/sdk": "1.0.0"
+        "zoonman/linkedin-api-php-client": "^0.0.13"
     },
     "minimum-stability": "dev",
     "repositories": [{
