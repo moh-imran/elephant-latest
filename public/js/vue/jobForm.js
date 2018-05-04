@@ -23,30 +23,54 @@ new Vue({
                 fileName :'',
                 salary_expectation:null
             },
-        industryOptions: [
-                    'Option One', 'Option Two', 'Option Three'
-            ],
-        positionOptions: [
-                    'Option One', 'Option Two', 'Option Three'
-            ],
-        keySkillsOptions: [
-                    'Option One', 'Option Two', 'Option Three'
-            ],
-        environmentOptions: [
-                    'Option One', 'Option Two', 'Option Three'
-            ],
-        salaryOptions: [
-                    'Option One', 'Option Two', 'Option Three'
-            ],
+        industryOptions: [],
+        positionOptions: [],
+        keySkillsOptions: [],
+        environmentOptions: [],
+        salaryOptions: [],
         success:[],
         errors:[]
 
     },
+    created: function () {
+        this.dropDownOptions();
+    },
     methods:{
-        // customLabel: function (option) {
-        //     return `${option.library} - ${option.language}`
-        // },
 
+        dropDownOptions : function(){
+
+            this.$http.get('/dev/drop-down-options').then(response => {
+
+                var dropDownOptions = response.body.data;
+                for(var i=0; i < dropDownOptions.length; i++){
+                    console.log('dropdown', dropDownOptions[i].data.drop_down_name);
+                    if((dropDownOptions[i].data.drop_down_name).trim() == 'industries'){
+                        this.industryOptions.push(dropDownOptions[i].data.drop_down_value);
+                    }
+
+                    if((dropDownOptions[i].data.drop_down_name).trim() == 'positions'){
+                        this.positionOptions.push(dropDownOptions[i].data.drop_down_value);
+                    }
+
+                    if((dropDownOptions[i].data.drop_down_name).trim() == 'skills'){
+                        this.keySkillsOptions.push(dropDownOptions[i].data.drop_down_value);
+                    }
+
+                    if((dropDownOptions[i].data.drop_down_name).trim() == 'environment'){
+                        this.environmentOptions.push(dropDownOptions[i].data.drop_down_value);
+                    }
+
+                    if((dropDownOptions[i].data.drop_down_name).trim() == 'salary'){
+                        this.salaryOptions.push(dropDownOptions[i].data.drop_down_value);
+                    }
+                }
+
+
+            }, response => {
+                    // error callback
+                });
+
+        },
         onFileChange : function(e){
 
             var files = e.target.files || e.dataTransfer.files;
@@ -161,7 +185,7 @@ new Vue({
             // append Blob/File object
             formData.append('resume', this.registration.fileName, this.registration.fileName.name);
 
-            // GET /someUrl
+
             this.$http.post('/dev/build-job', formData).then(response => {
 
                 this.success.push('Application sent successfully.');
