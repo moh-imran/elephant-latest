@@ -54,6 +54,7 @@ class JobApplicantsController extends Controller
 
     public function index(){
 
+
         $newsTickerString = $this->getNews('en');
         return view("job-builder", ["newsList" => $newsTickerString ]);
     }

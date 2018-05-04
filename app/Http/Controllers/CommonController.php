@@ -209,4 +209,10 @@ class CommonController extends Controller
 
     }
 
+    public function getDropDownOptions(){
+
+        $options = $this->client->getItems('job_builder_drop_down_options');
+        return Response::json($options, 200);
+    }
+
 }
