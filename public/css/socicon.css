@@ -10,7 +10,7 @@
 }
 
 [class^="socicon-"], [class*=" socicon-"] {
-  /* use !important to prevent issues with browser extensions that change fonts */
+  /* use !important to prevent issues with browser extensions that change font */
   font-family: 'Socicon' !important;
   speak: none;
   font-style: normal;

@@ -28,3 +28,7 @@ Route::get('get-linkedin-feeds', 'CommonController@getLinkedInFeeds');
 Route::get('get-home-content', 'CommonController@getHomeContent');
 Route::get('drop-down-options', 'CommonController@getDropDownOptions');
 
+
+Route::get('job-builder-new', 'JobApplicantsNewController@index');
+Route::post('post-job-application', 'JobApplicantsNewController@postJobApplication');
+
