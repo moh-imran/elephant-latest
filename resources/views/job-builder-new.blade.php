@@ -50,7 +50,7 @@
 <main>
     <div class="container">
         <div id="wizard_container">
-            <form name="example-1" id="wrapped" action="post-job-application" method="POST">
+            <form name="example-1" id="wrapped" enctype="multipart/form-data" action="post-job-application" method="POST">
                 <input id="website" name="website" type="text" value="">
                 <!-- Leave for security protection, read docs for details -->
                 <div id="middle-wizard">
@@ -89,9 +89,9 @@
                                         <div class="styled-select">
                                             <select class="required" name="key_skills">
                                                 <option value="" selected>Select</option>
-                                                <option value="Unix/Linux + Mysql">Unix/Linux + Mysql</option>
-                                                <option value="Windows + Sql">Windows + Sql</option>
-                                                <option value="Other">Other</option>
+                                                @foreach ($skills as $skill)
+                                                    <option value="{{ $skill }}">{{ $skill }}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
@@ -117,9 +117,9 @@
                                         <div class="styled-select">
                                             <select class="required" name="position">
                                                 <option value="" selected>Select</option>
-                                                <option value="Unix/Linux + Mysql">Unix/Linux + Mysql</option>
-                                                <option value="Windows + Sql">Windows + Sql</option>
-                                                <option value="Other">Other</option>
+                                                @foreach ($positions as $position)
+                                                    <option value="{{ $position }}">{{ $position }}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
@@ -141,9 +141,9 @@
                                         <div class="styled-select">
                                             <select class="required" name="environment">
                                                 <option value="" selected>Select</option>
-                                                <option value="Hosting Plan 1 year + Mysql database 500MB">1 year + Mysql database 500MB</option>
-                                                <option value="Hosting Plan 2 year + Mysql database 500MB">2 year + Mysql database 500MB</option>
-                                                <option value="Hosting Plan 2 year + Mysql database 1GB">2 year + Mysql database 1GB</option>
+                                                @foreach ($environments as $environment)
+                                                    <option value="{{ $environment }}">{{ $environment }}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
