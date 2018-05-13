@@ -4,3 +4,4 @@
 <script src="{{ URL::asset('public/js/job-builder-js/menu.js') }}"> </script>
 <script src="{{ URL::asset('public/js/job-builder-js/main.js') }}"> </script>
 <script src="{{ URL::asset('public/js/job-builder-js/wizard_func_multiple_branch.js') }}"> </script>
+<script src="{{ URL::asset('public/js/job-builder-js/bootstrap-multiselect.js') }}"> </script>

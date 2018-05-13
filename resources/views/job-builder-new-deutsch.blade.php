@@ -18,7 +18,7 @@
         <div class="row">
             <div class="col-3">
                 <div id="logo_home">
-                    <h1><a href="{{asset('/')}}">STEPS | Multipurpose Working Wizard with Branches</a></h1>
+                    <h1><a href="{{asset('/de')}}">STEPS | Multipurpose Working Wizard with Branches</a></h1>
                 </div>
             </div>
             <div class="col-9">
@@ -340,7 +340,7 @@
 <footer>
     <div class="container clearfix">
         <ul>
-            <li><a href="{{asset('/')}}" class="animated_link"> << Back to Website</a></li>
+            <li><a href="{{asset('/de')}}" class="animated_link"> << Back to Website</a></li>
 
         </ul>
         <p>© 2017 elephant-hr</p>

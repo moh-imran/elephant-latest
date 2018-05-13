@@ -16,11 +16,24 @@ class JobApplicantsNewController extends Controller
 
     public function index(){
 
+        $roles = $this->getRole('en');
+        $stacks = $this->getStack('en');
         $environments = $this->getEnvironment('en');
         $skills = $this->getSkill('en');
         $positions = $this->getPosition('en');
-        return view('job-builder-new', compact('environments', 'skills', 'positions'));
+        return view('job-builder-new', compact('environments', 'stacks', 'roles', 'skills', 'positions'));
     }
+
+    public function indexDeutsch(){
+
+        $roles = $this->getRole('de');
+        $stacks = $this->getStack('de');
+        $environments = $this->getEnvironment('de');
+        $skills = $this->getSkill('de');
+        $positions = $this->getPosition('de');
+        return view('job-builder-new-deutsch', compact('environments', 'stacks', 'roles', 'skills', 'positions'));
+    }
+
 
     public function getEnvironment($lang){
 
@@ -53,6 +66,7 @@ class JobApplicantsNewController extends Controller
         $skillGerman = [];
 
         $skillList = $this->client->getItems('job_builder_skills');
+
         if ($lang == 'en'){
             foreach ($skillList as $skill){
                 if ($skill->language == 'English'){
@@ -95,9 +109,63 @@ class JobApplicantsNewController extends Controller
         }
     }
 
+
+    public function getStack($lang){
+
+        $stackEnglish = [];
+        $stackGerman = [];
+
+        $stackList = $this->client->getItems('job_builder_stack');
+        if ($lang == 'en'){
+            foreach ($stackList as $stack){
+                if ($stack->language == 'English'){
+                    $stackEnglish[$stack->stack] = $stack->stack;
+                }
+            }
+            return $stackEnglish;
+        }
+        else if($lang == 'de'){
+            foreach ($stackList as $stack){
+                if ($stack->language == 'German'){
+                    $stackGerman[$stack->stack] = $stack->stack;
+                }
+            }
+            return $stackGerman;
+        }
+    }
+
+
+    public function getRole($lang){
+
+        $roleEnglish = [];
+        $roleGerman = [];
+
+        $roleList = $this->client->getItems('job_builder_role');
+        if ($lang == 'en'){
+            foreach ($roleList as $role){
+                if ($role->language == 'English'){
+                    $roleEnglish[$role->role] = $role->role;
+                }
+            }
+            return $roleEnglish;
+        }
+        else if($lang == 'de'){
+            foreach ($roleList as $role){
+                if ($role->language == 'German'){
+                    $roleGerman[$role->role] = $role->role;
+                }
+            }
+            return $roleGerman;
+        }
+    }
+
     public function postJobApplication(Request $request){
 
         $requestData = $request->all();
+
+//        print_r($requestData);
+//        exit;
+
         $data['industry'] = $requestData['industry'][0];
         $data['first_name'] = $requestData['first_name'];
         $data['last_name'] = $requestData['last_name'];
@@ -105,10 +173,14 @@ class JobApplicantsNewController extends Controller
         $data['location'] = $requestData['country'];
         $data['position'] = $requestData['position'];
         $key_skills[] =  [ 'language' => 'English', 'key_skill' => $requestData['key_skills']];//$requestData['key_skills'];
-        $data['key_skills'] =  1;
+        $data['key_skills'] =  $requestData['key_skills'];
         $data['environment'] = $requestData['environment'];
         $data['salary_expectation'] = $requestData['budget_slider'];
+        $data['role'] = $requestData['role'];
+        $data['stack'] = $requestData['stack'];
         $file = $requestData['resume'];
+        $data['work_permit'] = $requestData['permit'];
+
         $filobj = new \Directus\SDK\File($file->getpathName(), []);
         $fileUploaded = $this->client->createFile($filobj);
         $data['resume'] = $fileUploaded['id'];
@@ -117,10 +189,12 @@ class JobApplicantsNewController extends Controller
             $newRequest = $this->client->createItem('job_builder', $data);
 
             if (isset($newRequest['id'])){
-                return Response::make('Record created successfully.', 200);
+                return redirect()->back()->with('success-message', 'Application saved successfully.');
+//                return Response::make('Record created successfully.', 200);
             }
             else{
-                return Response::make('Record failed to create.', 200);
+                return redirect()->back()->with('error-message', 'Application could not be saved successfully.');
+//                return Response::make('Record failed to create.', 200);
             }
         }
         catch (\Exception $e) {

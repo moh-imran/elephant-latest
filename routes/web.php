@@ -17,8 +17,8 @@
 
 Route::get('/', 'CommonController@index');
 Route::get('/de', 'CommonController@indexDeutsch');
-Route::get('job-builder', 'JobApplicantsController@index');
-Route::get('de/job-builder', 'JobApplicantsController@indexDeutsch');
+//Route::get('job-builder', 'JobApplicantsController@index');
+//Route::get('de/job-builder', 'JobApplicantsController@indexDeutsch');
 
 
 Route::post('build-job', 'JobApplicantsController@postJob');
@@ -29,6 +29,8 @@ Route::get('get-home-content', 'CommonController@getHomeContent');
 Route::get('drop-down-options', 'CommonController@getDropDownOptions');
 
 
-Route::get('job-builder-new', 'JobApplicantsNewController@index');
+Route::get('job-builder', 'JobApplicantsNewController@index');
+Route::get('de/job-builder', 'JobApplicantsNewController@indexDeutsch');
 Route::post('post-job-application', 'JobApplicantsNewController@postJobApplication');
+Route::post('de/post-job-application', 'JobApplicantsNewController@postJobApplication');
 
