@@ -104,9 +104,11 @@ class JobApplicantsNewController extends Controller
             return Response::json($skillEnglish, 200);
         }
         else if($lang == 'de'){
-            foreach ($skillList as $skill){
+            foreach ($skillList as $id => $skill){
                 if ($skill->language == 'German'){
-                    $skillGerman[$skill->key_skill] = $skill->key_skill;
+                    $skillGerman1['id'] = $id;
+                    $skillGerman1['skill'] = $skill->key_skill;
+                    array_push($skillGerman, $skillGerman1);
                 }
             }
             return Response::json($skillGerman, 200);
@@ -191,8 +193,8 @@ class JobApplicantsNewController extends Controller
 
         $requestData = $request->all();
 
-        print_r($requestData);
-        exit;
+//        print_r($requestData);
+//        exit;
 
         $data['industry'] = $requestData['industry'][0];
         $data['first_name'] = $requestData['first_name'];
