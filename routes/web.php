@@ -33,4 +33,5 @@ Route::get('job-builder', 'JobApplicantsNewController@index');
 Route::get('de/job-builder', 'JobApplicantsNewController@indexDeutsch');
 Route::post('post-job-application', 'JobApplicantsNewController@postJobApplication');
 Route::post('de/post-job-application', 'JobApplicantsNewController@postJobApplication');
+Route::get('get-skills', 'JobApplicantsNewController@getSkillJson');
 

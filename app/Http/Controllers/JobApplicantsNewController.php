@@ -85,6 +85,34 @@ class JobApplicantsNewController extends Controller
         }
     }
 
+    public function getSkillJson(){
+
+        $lang = $_GET['lang'];
+        $skillEnglish = [];
+        $skillGerman = [];
+
+        $skillList = $this->client->getItems('job_builder_skills');
+
+        if ($lang == 'en'){
+            foreach ($skillList as $id => $skill){
+                if ($skill->language == 'English'){
+                    $skillEnglish1['id'] = $id;
+                    $skillEnglish1['skill'] = $skill->key_skill;
+                    array_push($skillEnglish, $skillEnglish1);
+                }
+            }
+            return Response::json($skillEnglish, 200);
+        }
+        else if($lang == 'de'){
+            foreach ($skillList as $skill){
+                if ($skill->language == 'German'){
+                    $skillGerman[$skill->key_skill] = $skill->key_skill;
+                }
+            }
+            return Response::json($skillGerman, 200);
+        }
+    }
+
     public function getPosition($lang){
 
         $positionEnglish = [];
@@ -163,8 +191,8 @@ class JobApplicantsNewController extends Controller
 
         $requestData = $request->all();
 
-//        print_r($requestData);
-//        exit;
+        print_r($requestData);
+        exit;
 
         $data['industry'] = $requestData['industry'][0];
         $data['first_name'] = $requestData['first_name'];

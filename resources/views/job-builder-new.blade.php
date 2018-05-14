@@ -44,6 +44,13 @@
         </div>
     </div>
     <!-- /container -->
+    <style>
+        .magicsearch-box{
+            top: 40px !important;
+            height: auto !important;
+            width: 340px !important;
+        }
+    </style>
 </header>
 <!-- /Header -->
 
@@ -66,6 +73,8 @@
                         </div>
                     @endif
                     <div class="step">
+
+
                         <div class="question_title">
                             <h3>What Type of job are you looking for ?</h3>
                             <p>Pick your Industry</p>
@@ -217,23 +226,17 @@
                                         </div>
                                     </div>
 
-                                    <div class="form-group select">
+                                    <div class="form-group ">
                                     <label>Key Skills</label>
-                                        {{--<div>--}}
-                                            {{--<select id="demo" multiple="multiple" class="required" name="key_skills">--}}
+
+                                        <div>
+                                            <input style="width: 340px !important; height: 40px !important;" class="magicsearch" name="key_skills" id="basic" placeholder="search skill...">
+                                            {{--<select  class="required"  name="key_skills">--}}
+                                            {{--<option value="" selected>Select</option>--}}
                                                 {{--@foreach ($skills as $skill)--}}
-                                                {{--<option value="{{ $skill }}">{{ $skill }}</option>--}}
+                                                    {{--<option value="{{ $skill }}">{{ $skill }}</option>--}}
                                                 {{--@endforeach--}}
-                                                {{--</select>--}}
                                             {{--</select>--}}
-                                        {{--</div>--}}
-                                        <div class="styled-select">
-                                            <select  class="required"  name="key_skills">
-                                            <option value="" selected>Select</option>
-                                                @foreach ($skills as $skill)
-                                                    <option value="{{ $skill }}">{{ $skill }}</option>
-                                                @endforeach
-                                            </select>
                                         </div>
                                     </div>
 
@@ -384,11 +387,40 @@
 @include('job-builder-partials.scripts')
 <script>
 $(document).ready(function() {
-    // $('#demo').multiselect(
-    //     {
-    //         enableCaseInsensitiveFiltering: true
-    //     }
-    // );
+
+    var dataSource = [];
+    $.ajax({
+        type: "GET",
+        url: "http://localhost/elephant/get-skills",
+        data: {'lang' : 'en'},
+        success: function(data){
+            for(var i=0; i < data.length; i++){
+                dataSource.push(data[i]);
+            }
+
+        }
+    });
+
+    console.log("res", dataSource);
+    $('#basic').magicsearch({
+        dataSource: dataSource,
+        fields: ['skill'],
+        id: 'id',
+        format: '%skill%',
+        multiple: true,
+        multiField: 'skill',
+        showSelected: true,
+        multiStyle: {
+            space: 5,
+            width: 80
+        },
+        success: function($input, data) {
+            console.log('data-yes', data.skill);
+            // $('.magicsearch').val(data.skill);
+            // $('input[name="key_skills"]').val('some value')
+
+        }
+});
 
 });
 </script>

@@ -22,7 +22,8 @@
     <link href="{{ asset('public/css/job-builder-css/all_icons.min.css') }}" rel="stylesheet" type="text/css" media="all" />
     <link href="{{ asset('public/css/job-builder-css/grey.css') }}" rel="stylesheet" type="text/css" media="all" />
     <link href="{{ asset('public/css/job-builder-css/custom.css') }}" rel="stylesheet" type="text/css" media="all" />
-    <link href="{{ asset('public/css/job-builder-css/bootstrap-multiselect.css') }}" rel="stylesheet" type="text/css" media="all" />
+{{--    <link href="{{ asset('public/css/job-builder-css/bootstrap-multiselect.css') }}" rel="stylesheet" type="text/css" media="all" />--}}
+    <link href="{{ asset('public/css/job-builder-css/jquery.magicsearch.min.css') }}" rel="stylesheet" type="text/css" media="all" />
 
     <script src="{{ URL::asset('public/js/job-builder-js/modernizr.js') }}"> </script>
     <script src="https://unpkg.com/vue-multiselect@2.1.0"></script>
