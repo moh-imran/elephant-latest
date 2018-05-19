@@ -229,8 +229,9 @@
                                     <div class="form-group ">
                                     <label>Key Skills</label>
 
-                                        <div>
-                                            <input style="width: 340px !important; height: 40px !important;" class="magicsearch" name="key_skills" id="basic" placeholder="search skill...">
+                                        <div class="hidde_key_skills">
+                                            <input style="width: 340px !important; height: 40px !important;" class="magicsearch" name="" id="basic" placeholder="search skill...">
+                                            <input class="required" type="hidden" name="key_skills">
                                             {{--<select  class="required"  name="key_skills">--}}
                                             {{--<option value="" selected>Select</option>--}}
                                                 {{--@foreach ($skills as $skill)--}}
@@ -401,12 +402,14 @@ $(document).ready(function() {
         }
     });
 
+    var values = [];
     console.log("res", dataSource);
     $('#basic').magicsearch({
         dataSource: dataSource,
         fields: ['skill'],
         id: 'id',
         format: '%skill%',
+        noResult: 'No Result Found',
         multiple: true,
         multiField: 'skill',
         showSelected: true,
@@ -415,12 +418,29 @@ $(document).ready(function() {
             width: 80
         },
         success: function($input, data) {
-            console.log('data-yes', data.skill);
-            // $('.magicsearch').val(data.skill);
-            // $('input[name="key_skills"]').val('some value')
 
+            // $('.magicsearch').val(' ');
+            // $('input[name="key_skills"]').val('abc');
+            values.push(data.skill);
+            $('input[name="key_skills"]').val(values);
+            if(values.length){
+                $('input[name="key_skills"]').removeClass('required');
+                $('input[name="key_skills"]').removeClass('error');
+                $('input[name="key_skills"]').addClass('valid');
+                $(".hidde_key_skills span"+'.error').hide();
+            }
+
+            // $('.magicsearch').addClass('valid');
+            // $("span."+'.error').hide();
+
+
+        },
+        afterDelete: function($input, data) {
+             values = values.filter(function(e) { return e !== data.skill });
+            $('input[name="key_skills"]').val(values);
         }
-});
+
+    });
 
 });
 </script>

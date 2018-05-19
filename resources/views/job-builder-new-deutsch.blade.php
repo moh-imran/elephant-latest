@@ -44,6 +44,13 @@
         </div>
     </div>
     <!-- /container -->
+    <style>
+        .magicsearch-box{
+            top: 40px !important;
+            height: auto !important;
+            width: 340px !important;
+        }
+    </style>
 </header>
 <!-- /Header -->
 
@@ -66,6 +73,8 @@
                         </div>
                     @endif
                     <div class="step">
+
+
                         <div class="question_title">
                             <h3>What Type of job are you looking for ?</h3>
                             <p>Pick your Industry</p>
@@ -79,10 +88,10 @@
                                 </div>
                             </div>
                             {{--<div class="col-lg-4">--}}
-                                {{--<div class="item">--}}
-                                    {{--<input id="answer_2" name="industry[]" type="radio" value="Web-Development" class="required">--}}
-                                    {{--<label for="answer_2"><img src="{{ asset('public/img/engineering.svg') }}" alt=""><strong>Engineering</strong>Postea democritum mnesarchum ne nam, ad vim aperiri tractatos.</label>--}}
-                                {{--</div>--}}
+                            {{--<div class="item">--}}
+                            {{--<input id="answer_2" name="industry[]" type="radio" value="Web-Development" class="required">--}}
+                            {{--<label for="answer_2"><img src="{{ asset('public/img/engineering.svg') }}" alt=""><strong>Engineering</strong>Postea democritum mnesarchum ne nam, ad vim aperiri tractatos.</label>--}}
+                            {{--</div>--}}
                             {{--</div>--}}
                         </div>
                         <!-- /row-->
@@ -136,28 +145,28 @@
                                         </div>
                                     </div>
                                     <!-- /select-->
+                                {{--<div class="form-group select">--}}
+                                {{--<label>Industry</label>--}}
+                                {{--<div class="styled-select">--}}
+                                {{--<select class="required" name="indust">--}}
+                                {{--<option value="" selected>Select</option>--}}
+                                {{--<option value="Unix/Linux + Mysql">Unix/Linux + Mysql</option>--}}
+                                {{--<option value="Windows + Sql">Windows + Sql</option>--}}
+                                {{--<option value="Other">Other</option>--}}
+                                {{--</select>--}}
+                                {{--</div>--}}
+                                {{--</div>--}}
+                                <!-- /select-->
                                     {{--<div class="form-group select">--}}
-                                        {{--<label>Industry</label>--}}
-                                        {{--<div class="styled-select">--}}
-                                            {{--<select class="required" name="indust">--}}
-                                                {{--<option value="" selected>Select</option>--}}
-                                                {{--<option value="Unix/Linux + Mysql">Unix/Linux + Mysql</option>--}}
-                                                {{--<option value="Windows + Sql">Windows + Sql</option>--}}
-                                                {{--<option value="Other">Other</option>--}}
-                                            {{--</select>--}}
-                                        {{--</div>--}}
+                                    {{--<label>Environment</label>--}}
+                                    {{--<div class="styled-select">--}}
+                                    {{--<select class="required" name="environment">--}}
+                                    {{--<option value="" selected>Select</option>--}}
+                                    {{--@foreach ($environments as $environment)--}}
+                                    {{--<option value="{{ $environment }}">{{ $environment }}</option>--}}
+                                    {{--@endforeach--}}
+                                    {{--</select>--}}
                                     {{--</div>--}}
-                                    <!-- /select-->
-                                    {{--<div class="form-group select">--}}
-                                        {{--<label>Environment</label>--}}
-                                        {{--<div class="styled-select">--}}
-                                            {{--<select class="required" name="environment">--}}
-                                                {{--<option value="" selected>Select</option>--}}
-                                                {{--@foreach ($environments as $environment)--}}
-                                                    {{--<option value="{{ $environment }}">{{ $environment }}</option>--}}
-                                                {{--@endforeach--}}
-                                            {{--</select>--}}
-                                        {{--</div>--}}
                                     {{--</div>--}}
 
                                 </div>
@@ -217,23 +226,18 @@
                                         </div>
                                     </div>
 
-                                    <div class="form-group select">
-                                    <label>Key Skills</label>
-                                        {{--<div>--}}
-                                            {{--<select id="demo" multiple="multiple" class="required" name="key_skills">--}}
-                                                {{--@foreach ($skills as $skill)--}}
-                                                {{--<option value="{{ $skill }}">{{ $skill }}</option>--}}
-                                                {{--@endforeach--}}
-                                                {{--</select>--}}
+                                    <div class="form-group ">
+                                        <label>Key Skills</label>
+
+                                        <div class="hidde_key_skills">
+                                            <input style="width: 340px !important; height: 40px !important;" class="magicsearch" name="" id="basic" placeholder="search skill...">
+                                            <input class="required" type="hidden" name="key_skills">
+                                            {{--<select  class="required"  name="key_skills">--}}
+                                            {{--<option value="" selected>Select</option>--}}
+                                            {{--@foreach ($skills as $skill)--}}
+                                            {{--<option value="{{ $skill }}">{{ $skill }}</option>--}}
+                                            {{--@endforeach--}}
                                             {{--</select>--}}
-                                        {{--</div>--}}
-                                        <div class="styled-select">
-                                            <select  class="required"  name="key_skills">
-                                            <option value="" selected>Select</option>
-                                                @foreach ($skills as $skill)
-                                                    <option value="{{ $skill }}">{{ $skill }}</option>
-                                                @endforeach
-                                            </select>
                                         </div>
                                     </div>
 
@@ -383,14 +387,62 @@
 <!-- COMMON SCRIPTS -->
 @include('job-builder-partials.scripts')
 <script>
-$(document).ready(function() {
-    // $('#demo').multiselect(
-    //     {
-    //         enableCaseInsensitiveFiltering: true
-    //     }
-    // );
+    $(document).ready(function() {
 
-});
+        var dataSource = [];
+        $.ajax({
+            type: "GET",
+            url: "http://localhost/elephant/get-skills",
+            data: {'lang' : 'de'},
+            success: function(data){
+                for(var i=0; i < data.length; i++){
+                    dataSource.push(data[i]);
+                }
+
+            }
+        });
+
+        var values = [];
+        console.log("res", dataSource);
+        $('#basic').magicsearch({
+            dataSource: dataSource,
+            fields: ['skill'],
+            id: 'id',
+            format: '%skill%',
+            noResult: 'No Result Found',
+            multiple: true,
+            multiField: 'skill',
+            showSelected: true,
+            multiStyle: {
+                space: 5,
+                width: 80
+            },
+            success: function($input, data) {
+
+                // $('.magicsearch').val(' ');
+                // $('input[name="key_skills"]').val('abc');
+                values.push(data.skill);
+                $('input[name="key_skills"]').val(values);
+                if(values.length){
+                    $('input[name="key_skills"]').removeClass('required');
+                    $('input[name="key_skills"]').removeClass('error');
+                    $('input[name="key_skills"]').addClass('valid');
+                    $(".hidde_key_skills span"+'.error').hide();
+                }
+
+                // $('.magicsearch').addClass('valid');
+                // $("span."+'.error').hide();
+
+
+            },
+            afterDelete: function($input, data) {
+                values = values.filter(function(e) { return e !== data.skill });
+                $('input[name="key_skills"]').val(values);
+            }
+
+        });
+
+    });
 </script>
 </body>
 
